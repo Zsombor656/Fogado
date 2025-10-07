@@ -37,7 +37,7 @@ app.get("/kihasznaltsag", (req, res) => {
       COUNT(DISTINCT foglalasok.vendeg) AS vendegek,
       SUM(DATEDIFF(foglalasok.tav, foglalasok.erk)) AS vendegejszakak
     FROM szobak
-    JOIN foglalasok ON szobak.szazon = foglalasok.szoba
+    INNER JOIN foglalasok ON szobak.szazon = foglalasok.szoba
     GROUP BY szobak.szazon, szobak.sznev
     ORDER BY vendegejszakak ASC, vendegek ASC;
   `;
