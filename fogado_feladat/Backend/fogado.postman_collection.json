@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "9cf529b3-c63c-42e8-8b16-05b6f5164aeb",
+		"name": "fogado",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48359791",
+		"_collection_link": "https://papzso656-5368204.postman.co/workspace/Papp-Zsombor's-Workspace~e1f9d229-e54e-4c89-84d4-b559a3f006ce/collection/48359791-9cf529b3-c63c-42e8-8b16-05b6f5164aeb?action=share&source=collection_link&creator=48359791"
+	},
+	"item": [
+		{
+			"name": "szobak",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "kihaszn",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "foglaltsag",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

@@ -51,3 +51,26 @@ app.get("/kihasznaltsag", (req, res) => {
     }
   });
 });
+
+app.get("/szoba-foglaltsag", (req, res) => {
+  const sql = `
+    SELECT 
+      vendegek.vnev AS nev,
+      foglalasok.erk AS erkezes,
+      foglalasok.tav AS tavozas,
+      foglalasok.szoba AS szobaId
+    FROM foglalasok
+    JOIN vendegek ON foglalasok.vendeg = vendegek.vsorsz
+    ORDER BY vendegek.vnev ASC;
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error("Lekérdezési hiba:", err);
+      res.status(500).send("Adatbázis hiba");
+    } else {
+      res.json(result);
+    }
+  });
+});
+
