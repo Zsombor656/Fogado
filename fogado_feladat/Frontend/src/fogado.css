@@ -4,8 +4,11 @@ body{
 
 .bg-fej {
   background-position: center;
-  height: 400px;
-
+  height: auto;
+  object-fit: cover;
+  max-height: 400px;
+  width: 100%;
+  text-align: center;
 }
 
 .bg-fej h1{
@@ -23,11 +26,25 @@ body{
 }
 
 .container{
-  margin-bottom: 25px;
+  width: 30%;
+  height: auto;
+  display: inline-block;
+  margin: 1%;
 }
 
-.bg-torzs {
-  align-content: center;
+#bg-torzs {
+  background-color: #C5C599;
+   vertical-align: top;
+   width: 400px;
+}
+#bg-torzs2 {
+background-color: white;
+vertical-align: top;
+}
+
+#bg-torzs3 {
+vertical-align: top;
+background-color: #C5C599;
 }
 
 h3{
@@ -52,3 +69,14 @@ a {
   visibility:hidden;
 }
 
+#fejlec{
+  background-color: red;
+}
+#ketagyaskep{
+  height: auto;
+  width: 80%;
+}
+#hollokokep{
+  height: 80%;
+  width: 90%;
+}

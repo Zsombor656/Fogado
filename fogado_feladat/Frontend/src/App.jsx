@@ -1,108 +1,139 @@
 import { useState, useEffect } from 'react';
-
+import './App.css';
+import './fogado.css';
 function App() {
   const [rooms, setRooms] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState(null);
-  const [usageData, setUsageData] = useState([]);
+  const [occupancy, setOccupancy] = useState([]);
+  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    // Backend API hívás a szobák adatainak lekérésére
+    
     fetch('http://localhost:3000/szobak')
-      .then((response) => response.json())
-      .then((data) => setRooms(data))
-      .catch((error) => console.error('Hiba az API hívás során:', error));
-
-    // Backend API hívás a szobák kihasználtságának lekérésére
+      .then((res) => {
+        return res.json();
+      })
+      .then(setRooms)
+      .catch((err) => console.error('Error loading /szobak:', err));
+  
+    
     fetch('http://localhost:3000/kihasznaltsag')
-      .then((response) => response.json())
-      .then((data) => setUsageData(data))
-      .catch((error) => console.error('Hiba az API hívás során:', error));
+      .then((res) => {
+        
+        return res.json();
+      })
+      .then(setOccupancy)
+      .catch((err) => console.error('Error loading /kihasznaltsag:', err));
+  
+    
+    fetch('http://localhost:3000/szoba-foglaltsag')
+      .then((res) => {
+        
+        return res.json();
+      })
+      .then(setBookings)
+      .catch((err) => console.error('Error loading /szoba-foglaltsag:', err));
   }, []);
-
-  const handleRoomSelect = (roomName) => {
-    // Szoba foglaltságának lekérése
-    fetch(`http://localhost:3000/szoba-foglaltsag?sznev=${roomName}`)
-      .then((response) => response.json())
-      .then((data) => setSelectedRoom(data))
-      .catch((error) => console.error('Hiba az API hívás során:', error));
-  };
 
   return (
     <>
-      <h1>Falusi szálláshely fajtái:</h1>
-      <ul>
-        <li>Vendégszoba: a vendégek rendelkezésére bocsátható önálló lakóegység...</li>
-        <li>Lakrész: önálló épület kettő, illetve több szobából álló lehatárolt része...</li>
-        <li>Vendégház: önálló épület, több szobával, mellékhelyiségekkel...</li>
-        <li>Sátorozóhely: csak valamelyik falusi szálláshely típus mellett...</li>
-      </ul>
+            <div>
+        <div><img src="./img/top.jpg" alt="" className="bg-fej" /></div>
+      </div>
 
-      <h1>A hét törpe fogadó</h1>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Szoba neve</th>
-            <th>Ágyak száma</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rooms.map((room, index) => (
-            <tr key={index}>
-              <td
-                style={{ cursor: 'pointer', textDecoration: 'underline' }}
-                onClick={() => handleRoomSelect(room.sznev)}
-              >
-                {room.sznev}
-              </td>
-              <td>{room.agy}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div >
+        <div className='container'>
+          <div className='container' id='bg-torzs'>
+            <h3>Napraforgós Nemzeti Tanúsító Védjegy célja</h3>
+                A falusi szálláshelyek napraforgós Nemzeti Tanúsító Védjegye a FATOSZ által több mint tíz éve létrehozott, és működtetett minősítési rendszer alapjaira épülve 2011 óta a minőségi falusi turizmus szimbóluma. 
+                A védjegy alapvető célja, hogy – összhangban az egyes szálláshelyek működtetéséről szóló 239/2009. 
+                Korm. rendeletben foglaltakkal – garanciát nyújtson a szálláshely szolgáltatás minőségének megfelelő színvonalára. 
+                A falusi vendégházak 1-4 napraforgós besorolást nyerhetnek el a külső, belső megjelenés, a felszereltség, a szolgáltatások színvonala, valamint a szállásadó személyes felkészültségének, szakmai képzettségének függvényében.
+                <p></p>
+                    <img src="./img/logo.png" alt="" />
+                    <img src="./img/holloko_masolata.jpg" alt="" id='hollokokep'/>
+            </div>
+          </div>
+          <div className='container' id='bg-torzs2'>
+            <h3>Falusi szálláshely fajtái</h3>
+            <ul>
+            <li>Vendégszoba: a vendégek rendelkezésére bocsátható önálló lakóegység, amely egy lakóhelyiségből, és a minősítéstől függően a hozzátartozó mellékhelyiségekből áll.</li> <li>Lakrész: önálló épület kettő, illetve több szobából álló lehatárolt része a minősítéstől függően hozzátartozó mellékhelyiségekkel együtt</li> <li>Vendégház: önálló épület, több szobával, mellékhelyiségekkel és főzési lehetőséggel rendelkező lakó-, illetve üdülőegység, családok vagy kisebb csoportok elszállásolására.</li> <li>Sátorozóhely: csak valamelyik falusi szálláshely típus mellett, mintegy azt kiegészítve üzemeltethető az előírt feltételek megléte esetén. Pl.: falusi vendégház sátorozóhellyel.</li>
+            </ul>
+            <img src="./img/ketagyas.jpg" alt="" id='ketagyaskep'/>
+          </div>
+          <div className='container' id='bg-torzs3'>
+            <h3>A hét törpe fogadó</h3>
+            <table className="Tables">
+              <thead>
+                <tr>
+                  <th>Szoba neve</th>
+                  <th>Ágyak száma</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rooms.map((room, i) => (
+                  <tr key={i}>
+                    <td>{room['sznev']}</td>
+                    <td>{room['agy']}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <ul>
+            <li>Ruhásszekrény</li>
+              <li>Saját fürdőszoba zuhanytálca</li>
+              <li>WC (fürdőszobával egyben)</li>
+            </ul>
+          </div>
+        </div>
+      <div>
+            <h3>A szobák kihasználtsága:</h3>
+            <table className="Tables">
+              <thead>
+                <tr>
+                  <th>Szoba</th>
+                  <th>Vendégek száma</th>
+                  <th>Vendégéjszakák</th>
+                </tr>
+              </thead>
+              <tbody>
+                {occupancy.map((o, i) => (
+                  <tr key={i}>
+                    <td>{o.szobanev}</td>
+                    <td>{o.vendegek}</td>
+                    <td>{o.vendegejszakak}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-      {selectedRoom && (
-        <>
-          <h2>A választott szoba foglaltsága: {selectedRoom.sznev}</h2>
-          <table border="1">
+      <div>
+      <div>
+  <div>
+    <div>
+      <h3>A vendégszobák foglaltsága</h3>
+          <table className="Tables">
             <thead>
               <tr>
-                <th>Szoba neve</th>
-                <th>Érkezés dátuma</th>
-                <th>Távozás dátuma</th>
+                <th>Szoba</th>
+                <th>Érkezés</th>
+                <th>Távozás</th>
               </tr>
             </thead>
             <tbody>
-              {selectedRoom.foglaltsag.map((foglalas, index) => (
-                <tr key={index}>
-                  <td>{foglalasok.sznev}</td>
-                  <td>{foglalas.erkezes}</td>
-                  <td>{foglalas.tavozas}</td>
+              {bookings.map((b, i) => (
+                <tr key={i}>
+                  <td>{b['Szobanév']}</td>
+                  <td>{b['Érkezés'] ? b['Érkezés'].split('T')[0] : '—'}</td>
+                  <td>{b['Távozás'] ? b['Távozás'].split('T')[0] : '—'}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </>
-      )}
-
-      <h1>A Szobák kihasználtsága:</h1>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Szoba neve</th>
-            <th>Vendégek száma</th>
-            <th>Vendégéjszakák száma</th>
-          </tr>
-        </thead>
-        <tbody>
-          {usageData.map((usage, index) => (
-            <tr key={index}>
-              <td>{usage.sznev}</td>
-              <td>{usage.vendegekSzama} fő</td>
-              <td>{usage.vendegejszakakSzama} éjszaka</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    </div>
+  </div>
+</div>
+      </div>
     </>
   );
 }
