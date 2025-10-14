@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Table from 'react-bootstrap/Table';
 import './App.css';
 import './fogado.css';
 function App() {
@@ -62,6 +63,7 @@ function App() {
           </div>
           <div className='container' id='bg-torzs3'>
             <h3>A hét törpe fogadó</h3>
+            
             <table className="Tables">
               <thead>
                 <tr>
@@ -72,7 +74,7 @@ function App() {
               <tbody>
                 {rooms.map((room, i) => (
                   <tr key={i}>
-                    <td>{room['sznev']}</td>
+                    <td >{room['sznev']}</td>
                     <td>{room['agy']}</td>
                   </tr>
                 ))}
