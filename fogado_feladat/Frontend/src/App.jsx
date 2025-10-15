@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import './App.css';
 import './fogado.css';
+import Button from 'react-bootstrap/Button';
+
 function App() {
   const [rooms, setRooms] = useState([]);
   const [occupancy, setOccupancy] = useState([]);
@@ -64,7 +66,7 @@ function App() {
           <div className='container' id='bg-torzs3'>
             <h3>A hét törpe fogadó</h3>
             
-            <table className="Tables">
+            <table className="Tablesek">
               <thead>
                 <tr>
                   <th>Szoba neve</th>
@@ -100,7 +102,7 @@ function App() {
               <tbody>
                 {occupancy.map((o, i) => (
                   <tr key={i}>
-                    <td>{o.szobanev}</td>
+                    <td>{o.szoba}</td>
                     <td>{o.vendegek}</td>
                     <td>{o.vendegejszakak}</td>
                   </tr>

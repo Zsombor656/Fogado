@@ -80,3 +80,15 @@ a {
   height: 80%;
   width: 90%;
 }
+.Tables {
+  width: 40%;
+  margin-top: 1rem;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+.Tables th,
+.Tables td {
+  border: 1px solid #020202;
+  padding: 8px;
+  text-align: left;
+}
